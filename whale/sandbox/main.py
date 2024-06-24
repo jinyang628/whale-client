@@ -1,9 +1,9 @@
 from whale.models.component import Component
-from whale.models.api import Api
+from whale.models.database.api_manager import ApiManager
 
 
 def main():
-    test_component = Component(name="test", description="test description", api_type=Api.GET)
+    test_component = Component(name="test", description="test description", api_manager=ApiManager)
     print(test_component)
     
 if __name__ == "__main__":
