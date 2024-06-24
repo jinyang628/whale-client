@@ -18,4 +18,4 @@ class Column(BaseModel):
 class Table(BaseModel):
     name: str
     description: Optional[str] = None
-    schema: list[Column]
+    columns: list[Column]

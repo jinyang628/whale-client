@@ -1,10 +1,9 @@
-from pydantic import BaseModel
-
 from whale.models.database.table import Table
 
 VERSION = "v1"
 
-class ApiManager(BaseModel):
+# TODO: Use pydantic BaseModel
+class Application:
     
     tables: list[Table]
     base_path: str
@@ -19,3 +18,6 @@ class ApiManager(BaseModel):
         
         self.tables = tables
         self.base_path = f"{api_key}/api/{VERSION}/"
+        
+    def __str__(self):
+        return f"ApiManager with {len(self.tables)} tables: {', '.join([table.name for table in self.tables])}"
