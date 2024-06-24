@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "whale"
+version = "0.1.0"
+description = "The open source library that allows users to create applications on the Whale platform."
+authors = ["jinyang628 <chenjinyang4192@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/jinyang628/whale"
+repository = "https://github.com/jinyang628/whale"
+documentation = "https://jinyang628.github.io/whale/"
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
