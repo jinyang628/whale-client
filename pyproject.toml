@@ -12,6 +12,7 @@ documentation = "https://jinyang628.github.io/whale/"
 [tool.poetry.dependencies]
 python = "^3.12"
 pydantic = "^2.7.4"
+requests = "^2.32.3"
 
 
 [tool.poetry.group.dev.dependencies]

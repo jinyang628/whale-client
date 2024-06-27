@@ -1,8 +1,8 @@
-from whale.application import Application
-from whale.models.database.table import Column, DataType, Table
+from whale.models.application import Application
+from whale.models.table import Column, DataType, Table
 
 
-def main():
+async def main():
     
     user_info_columns = [
         Column(name="name", data_type=DataType.STRING, nullable=False),
@@ -20,9 +20,11 @@ def main():
     
     user_profile_tables = [user_info_table, usage_table]
     
-    application = Application(tables=user_profile_tables, api_key="test_key")
+    application = Application(tables=user_profile_tables)
     
-    print(application)
+    manager = Manager()
+    response: str = await manager.commit(application=application)
+    print(response)
     
     
 if __name__ == "__main__":
