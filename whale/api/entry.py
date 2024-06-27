@@ -13,12 +13,13 @@ log = logging.getLogger(__name__)
 
 
 load_dotenv()
-BASE_URL = os.getenv("BACKEND_URL")
+BASE_URL = os.getenv("BACKEND_ENDPOINT")
 SERVICE_ENDPOINT = "entry"
 
 
 def post_entry(input: EntryRequest) -> Optional[EntryResponse]:
     try:
+        print(f"{BASE_URL}/{SERVICE_ENDPOINT}")
         response = requests.post(
             f"{BASE_URL}/{SERVICE_ENDPOINT}", json=input.model_dump()
         )

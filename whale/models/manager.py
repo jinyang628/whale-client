@@ -1,7 +1,25 @@
+from typing import Optional
+
+from pydantic import BaseModel
+from whale.api.entry import post_entry
+from whale.models.api.entry import EntryRequest, EntryResponse
 from whale.models.application import Application
+import logging
 
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
-class Manager:
+class Manager(BaseModel):
     
-    async def commit(self, application: Application) -> :
-        return 5
+    async def commit(self, application: Application) -> Optional[str]:
+        tables_dump: list[dict] = [table.model_dump() for table in application.tables]
+        
+        print(tables_dump)
+
+        response: Optional[EntryResponse] = await post_entry(
+            input=EntryRequest(application=tables_dump)
+        )
+        if not response:
+            log.error("Failed to commit application.")
+            return None
+        return response.id

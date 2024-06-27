@@ -1,5 +1,7 @@
+import asyncio
 from whale.models.application import Application
 from whale.models.table import Column, DataType, Table
+from whale.models.manager import Manager
 
 
 async def main():
@@ -20,7 +22,7 @@ async def main():
     
     user_profile_tables = [user_info_table, usage_table]
     
-    application = Application(tables=user_profile_tables)
+    application = Application(user_profile_tables)
     
     manager = Manager()
     response: str = await manager.commit(application=application)
@@ -28,4 +30,4 @@ async def main():
     
     
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
