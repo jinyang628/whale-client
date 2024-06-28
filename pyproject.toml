@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "whale"
+name = "whale-client"
 version = "0.1.0"
 description = "The open source library that allows users to create applications on the Whale platform."
 authors = ["jinyang628 <chenjinyang4192@gmail.com>"]
 readme = "README.md"
-homepage = "https://github.com/jinyang628/whale"
-repository = "https://github.com/jinyang628/whale"
-documentation = "https://jinyang628.github.io/whale/"
+homepage = "https://github.com/jinyang628/whale-client"
+repository = "https://github.com/jinyang628/whale-client"
+documentation = "https://jinyang628.github.io/whale-client/"
 
 
 [tool.poetry.dependencies]
