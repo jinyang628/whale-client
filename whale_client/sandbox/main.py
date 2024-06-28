@@ -1,7 +1,7 @@
 import asyncio
-from whale.models.application import Application
-from whale.models.table import Column, DataType, Table
-from whale.models.manager import Manager
+from whale_client.models.application import Application
+from whale_client.models.table import Column, DataType, Table
+from whale_client.models.manager import Manager
 
 
 async def main():

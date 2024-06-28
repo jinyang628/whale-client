@@ -7,7 +7,7 @@ import os
 
 import logging
 
-from whale.models.api.entry import EntryRequest, EntryResponse
+from whale_client.models.api.entry import EntryRequest, EntryResponse
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)

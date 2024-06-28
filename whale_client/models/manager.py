@@ -1,9 +1,9 @@
 from typing import Optional
 
 from pydantic import BaseModel
-from whale.api.entry import post_entry
-from whale.models.api.entry import EntryRequest, EntryResponse
-from whale.models.application import Application
+from whale_client.api.entry import post_entry
+from whale_client.models.api.entry import EntryRequest, EntryResponse
+from whale_client.models.application import Application
 import logging
 
 logging.basicConfig(level=logging.INFO)

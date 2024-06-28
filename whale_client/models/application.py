@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from whale.models.table import Table
+from whale_client.models.table import Table
 
 VERSION = "v1"
 
