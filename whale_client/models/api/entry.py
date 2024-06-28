@@ -1,8 +1,9 @@
 from pydantic import BaseModel
 
 
-class EntryRequest(BaseModel):
-    application: list[dict]
+class ApplicationRequest(BaseModel):
+    name: str
+    tables: list[dict]
 
-class EntryResponse(BaseModel):
+class ApplicationResponse(BaseModel):
     id: str

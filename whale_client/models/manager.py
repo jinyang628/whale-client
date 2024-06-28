@@ -1,8 +1,8 @@
 from typing import Optional
 
 from pydantic import BaseModel
-from whale_client.api.entry import post_entry
-from whale_client.models.api.entry import EntryRequest, EntryResponse
+from whale_client.api.entry import post_application
+from whale_client.models.api.entry import ApplicationRequest, ApplicationResponse
 from whale_client.models.application import Application
 import logging
 
@@ -13,10 +13,11 @@ class Manager(BaseModel):
     
     def commit(self, application: Application) -> Optional[str]:
         tables_dump: list[dict] = [table.model_dump() for table in application.tables]
-        
-        response: Optional[EntryResponse] = post_entry(
-            input=EntryRequest(application=tables_dump)
+        input = ApplicationRequest(
+            name=application.name,
+            tables=tables_dump
         )
+        response: Optional[ApplicationResponse] = post_application(input=input)
         if not response:
             log.error("Failed to commit application.")
             return None

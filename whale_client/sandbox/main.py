@@ -21,8 +21,9 @@ async def main():
     usage_table = Table(name="usage", description="This table stores the usage information", columns=usage_columns) 
     
     user_profile_tables = [user_info_table, usage_table]
+    application_name = "user_management"
     
-    application = Application(user_profile_tables)
+    application = Application(application_name, user_profile_tables)
     
     manager = Manager()
     response: str = manager.commit(application=application)
