@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 import requests
 from dotenv import load_dotenv
@@ -19,12 +20,11 @@ SERVICE_ENDPOINT = "entry"
 
 def post_entry(input: EntryRequest) -> Optional[EntryResponse]:
     try:
-        print(f"{BASE_URL}/{SERVICE_ENDPOINT}")
         response = requests.post(
             f"{BASE_URL}/{SERVICE_ENDPOINT}", json=input.model_dump()
         )
         response.raise_for_status()
-        entry_response = EntryResponse.model_validate(response.json())
+        entry_response = EntryResponse.model_validate(json.loads(response.text))
         return entry_response
     except TypeError as e:
         log.error(

@@ -25,7 +25,7 @@ async def main():
     application = Application(user_profile_tables)
     
     manager = Manager()
-    response: str = await manager.commit(application=application)
+    response: str = manager.commit(application=application)
     print(response)
     
     

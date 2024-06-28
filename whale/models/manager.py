@@ -11,12 +11,10 @@ log = logging.getLogger(__name__)
 
 class Manager(BaseModel):
     
-    async def commit(self, application: Application) -> Optional[str]:
+    def commit(self, application: Application) -> Optional[str]:
         tables_dump: list[dict] = [table.model_dump() for table in application.tables]
         
-        print(tables_dump)
-
-        response: Optional[EntryResponse] = await post_entry(
+        response: Optional[EntryResponse] = post_entry(
             input=EntryRequest(application=tables_dump)
         )
         if not response:
