@@ -21,7 +21,7 @@ async def main():
     usage_table = Table(name="usage", description="This table stores the usage information", columns=usage_columns) 
     
     user_profile_tables = [user_info_table, usage_table]
-    application_name = "user_management123"
+    application_name = "user_management"
     
     application = Application(application_name, user_profile_tables)
     
