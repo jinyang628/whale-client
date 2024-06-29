@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "whale-client"
-version = "0.1.0"
+version = "0.1.1"
 description = "The open source library that allows users to create applications on the Whale platform."
 authors = ["jinyang628 <chenjinyang4192@gmail.com>"]
 readme = "README.md"
