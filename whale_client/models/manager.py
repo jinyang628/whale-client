@@ -9,16 +9,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
+
 class Manager(BaseModel):
-    
+
     def commit(self, application: Application) -> Optional[str]:
         tables_dump: list[dict] = [table.model_dump() for table in application.tables]
-        input = ApplicationRequest(
-            name=application.name,
-            tables=tables_dump
-        )
+        input = ApplicationRequest(name=application.name, tables=tables_dump)
         response: Optional[ApplicationResponse] = post_application(input=input)
         if not response:
             log.error("Failed to commit application.")
             return None
-        return response.id
+        return response.name
