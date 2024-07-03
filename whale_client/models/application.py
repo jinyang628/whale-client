@@ -9,7 +9,12 @@ class Application:
     _name: str
     _tables: list[Table]
     
-    def __init__(self, name, tables: list[Table]):
+    def __init__(self, name: str, tables: list[Table]):
+        if not name:
+            raise ValueError("Application name cannot be empty.")
+        if not tables:
+            raise ValueError("Application must contain at least one table.")
+        
         table_names = [table.name for table in tables]
         if len(table_names) != len(set(table_names)):
             raise ValueError("Table names passed into Application are not unique.")
