@@ -31,7 +31,7 @@ async def main():
             primary_key=PrimaryKey.AUTO_INCREMENT,
         ),
         Column(name="name", data_type=DataType.STRING, nullable=False),
-        Column(name="tokens", data_type=DataType.INTEGER, nullable=False),
+        Column(name="tokens", data_type=DataType.INTEGER, nullable=False, default_value=0),
     ]
 
     usage_table = Table(
@@ -41,7 +41,7 @@ async def main():
     )
 
     user_profile_tables = [user_info_table, usage_table]
-    application_name = "test"
+    application_name = "big"
 
     application = Application(application_name, user_profile_tables)
 
