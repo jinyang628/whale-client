@@ -23,24 +23,7 @@ async def main():
         columns=user_info_columns,
     )
 
-    usage_columns = [
-        Column(
-            name="id",
-            data_type=DataType.INTEGER,
-            nullable=False,
-            primary_key=PrimaryKey.AUTO_INCREMENT,
-        ),
-        Column(name="name", data_type=DataType.STRING, nullable=False),
-        Column(name="tokens", data_type=DataType.INTEGER, nullable=False),
-    ]
-
-    usage_table = Table(
-        name="usage",
-        description="This table stores the usage information",
-        columns=usage_columns,
-    )
-
-    user_profile_tables = [user_info_table, usage_table]
+    user_profile_tables = [user_info_table]
     application_name = "huge_whale"
 
     application = Application(application_name, user_profile_tables)
