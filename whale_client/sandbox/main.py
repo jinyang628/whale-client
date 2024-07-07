@@ -41,7 +41,7 @@ async def main():
     )
 
     user_profile_tables = [user_info_table, usage_table]
-    application_name = "huge_whale"
+    application_name = "test"
 
     application = Application(application_name, user_profile_tables)
 

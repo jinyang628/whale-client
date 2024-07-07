@@ -1,6 +1,6 @@
 from enum import StrEnum
-from pydantic import BaseModel, Field, model_validator
 from typing import Optional, Any
+from pydantic import BaseModel, model_validator
 
 
 # TODO: Expand the valid data types as per SQLAlchemy/SQLite's valid data types
@@ -27,24 +27,26 @@ class Column(BaseModel):
     default_value: Optional[Any] = None
 
     @model_validator(mode="before")
-    def set_default_value(self, values):
-        if "nullable" in values and "default_value" not in values:
-            nullable = values["nullable"]
-            data_type = values["data_type"]
-            if not nullable:
-                if data_type == DataType.STRING:
-                    values["default_value"] = ""
-                elif data_type == DataType.INTEGER:
-                    values["default_value"] = 0
-                elif data_type == DataType.FLOAT:
-                    values["default_value"] = 0.0
-                elif data_type == DataType.BOOLEAN:
-                    values["default_value"] = False
-                elif data_type == DataType.DATETIME:
-                    values["default_value"] = (
-                        "1970-01-01T00:00:00Z"  # ISO format for datetime
-                    )
-        return values
+    @classmethod
+    def set_default_value(cls, data: Any) -> Any:
+        if isinstance(data, dict):
+            if "nullable" in data and "default_value" not in data:
+                nullable = data["nullable"]
+                data_type = data["data_type"]
+                if not nullable:
+                    if data_type == DataType.STRING:
+                        data["default_value"] = ""
+                    elif data_type == DataType.INTEGER:
+                        data["default_value"] = 0
+                    elif data_type == DataType.FLOAT:
+                        data["default_value"] = 0.0
+                    elif data_type == DataType.BOOLEAN:
+                        data["default_value"] = False
+                    elif data_type == DataType.DATETIME:
+                        data["default_value"] = (
+                            "1970-01-01T00:00:00Z"  # ISO format for datetime
+                        )
+        return data
 
 
 class Table(BaseModel):
