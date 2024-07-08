@@ -13,7 +13,7 @@ async def main():
             nullable=False,
             primary_key=PrimaryKey.AUTO_INCREMENT,
         ),
-        Column(name="name", data_type=DataType.STRING, nullable=False),
+        Column(name="name", data_type=DataType.STRING, nullable=False, unique=True),
         Column(name="email", data_type=DataType.STRING, nullable=True),
     ]
 
@@ -31,7 +31,9 @@ async def main():
             primary_key=PrimaryKey.AUTO_INCREMENT,
         ),
         Column(name="name", data_type=DataType.STRING, nullable=False),
-        Column(name="tokens", data_type=DataType.INTEGER, nullable=False, default_value=0),
+        Column(
+            name="tokens", data_type=DataType.INTEGER, nullable=False, default_value=0
+        ),
     ]
 
     usage_table = Table(

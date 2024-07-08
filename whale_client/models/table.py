@@ -25,23 +25,24 @@ class Column(BaseModel):
     primary_key: PrimaryKey = PrimaryKey.NONE
     nullable: bool = False
     default_value: Optional[Any] = None
+    unique: Optional[bool] = False
 
     @model_validator(mode="before")
     @classmethod
     def set_default_value(cls, data: Any) -> Any:
-        
+
         if not isinstance(data, dict):
             raise ValueError("Column data must be a dictionary.")
-        
+
         # If the default value is set, use it
-        if ("default_value" in data):
+        if "default_value" in data:
             return data
-        
+
         if "nullable" in data:
             if data["nullable"]:
                 # If the column is nullable, the default value is None
                 return data
-            
+
         data_type = data["data_type"]
         if data_type == DataType.STRING:
             data["default_value"] = ""
@@ -52,10 +53,8 @@ class Column(BaseModel):
         elif data_type == DataType.BOOLEAN:
             data["default_value"] = False
         elif data_type == DataType.DATETIME:
-            data["default_value"] = (
-                "1970-01-01T00:00:00Z"  # ISO format for datetime
-            )
-            
+            data["default_value"] = "1970-01-01T00:00:00Z"  # ISO format for datetime
+
         return data
 
 
