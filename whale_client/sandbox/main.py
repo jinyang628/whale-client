@@ -30,7 +30,7 @@ async def main():
             nullable=False,
             primary_key=PrimaryKey.AUTO_INCREMENT,
         ),
-        Column(name="name", data_type=DataType.STRING, nullable=False),
+        Column(name="name", data_type=DataType.STRING, nullable=False, unique=False),
         Column(
             name="tokens", data_type=DataType.INTEGER, nullable=False, default_value=0
         ),
