@@ -96,5 +96,11 @@ class Table(BaseModel):
             raise ValueError("Exactly one column must be set as primary key.")
 
     def _validate_name(self):
+        if not self.name: 
+            raise ValueError("Table name cannot be empty.")
+        
         if not self.name.islower():
-            raise ValueError("All characters in table name must be in lowercase.")
+            raise ValueError("All characters in table name must be in lower case.")
+        
+        if " " in self.name:
+            raise ValueError("Table name cannot contain spaces.")
