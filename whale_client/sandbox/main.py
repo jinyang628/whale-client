@@ -6,54 +6,30 @@ from whale_client.models.manager import Manager
 
 async def main():
 
-    user_info_columns = [
+    user_feedback_columns = [
         Column(
             name="id",
             data_type=DataType.INTEGER,
             nullable=False,
             primary_key=PrimaryKey.AUTO_INCREMENT,
         ),
-        Column(
-            name="name",
-            data_type=DataType.STRING,
-            nullable=False,
-            unique=True,
-            foreign_key=ForeignKey(table="usage", column="name"),
-        ),
-        Column(
-            name="email",
-            data_type=DataType.STRING,
-            nullable=True,
-        ),
+        Column(name="user_id", data_type=DataType.STRING, nullable=False),
+        Column(name="application_name", data_type=DataType.STRING, nullable=False),
+        Column(name="feedback", data_type=DataType.STRING, nullable=True),
+        Column(name="personal_notes", data_type=DataType.STRING, nullable=True),
     ]
 
-    user_info_table = Table(
-        name="info",
-        description="This table stores the user information",
-        columns=user_info_columns,
+    user_feedback_table = Table(
+        name="feedback",
+        description="This table stores the user feedback",
+        columns=user_feedback_columns,
     )
 
-    usage_columns = [
-        Column(
-            name="id",
-            data_type=DataType.INTEGER,
-            nullable=False,
-            primary_key=PrimaryKey.AUTO_INCREMENT,
-        ),
-        Column(name="name", data_type=DataType.STRING, nullable=False, unique=True),
-        Column(name="tokens", data_type=DataType.INTEGER, nullable=False),
-    ]
+    user_feedback_tables = [user_feedback_table]
 
-    usage_table = Table(
-        name="usage",
-        description="This table stores the usage information",
-        columns=usage_columns,
-    )
+    application_name = "User_Feedback"
 
-    user_profile_tables = [user_info_table, usage_table]
-    application_name = "book"
-
-    application = Application(application_name, user_profile_tables)
+    application = Application(application_name, user_feedback_tables)
 
     manager = Manager()
     response: str = manager.commit(application=application)
