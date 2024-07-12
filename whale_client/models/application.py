@@ -12,6 +12,10 @@ class Application:
     def __init__(self, name: str, tables: list[Table]):
         if not name:
             raise ValueError("Application name cannot be empty.")
+        
+        if not name.islower():
+            raise ValueError("All characters in application name must be in lower case.")
+        
         if not tables:
             raise ValueError("Application must contain at least one table.")
         

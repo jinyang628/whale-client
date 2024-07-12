@@ -27,7 +27,7 @@ async def main():
 
     user_feedback_tables = [user_feedback_table]
 
-    application_name = "User_Feedback"
+    application_name = "feedback34"
 
     application = Application(application_name, user_feedback_tables)
 

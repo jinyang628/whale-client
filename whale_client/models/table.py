@@ -72,6 +72,7 @@ class Table(BaseModel):
     def __init__(self, **data):
         super().__init__(**data)
         self._validate_primary_key()
+        self._validate_name()
 
     def _validate_primary_key(self):
         primary_key_columns = [
@@ -79,3 +80,7 @@ class Table(BaseModel):
         ]
         if len(primary_key_columns) != 1:
             raise ValueError("Exactly one column must be set as primary key.")
+
+    def _validate_name(self):
+        if not self.name.islower():
+            raise ValueError("All characters in table name must be in lowercase.")
