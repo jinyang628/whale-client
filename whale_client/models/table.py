@@ -63,6 +63,20 @@ class Column(BaseModel):
 
         return data
 
+    def __init__(self, **data):
+        super().__init__(**data)
+        self._validate_name()
+
+    def _validate_name(self):
+        if not self.name: 
+            raise ValueError("Column name cannot be empty.")
+        
+        if not self.name.islower():
+            raise ValueError("All characters in column name must be in lower case.")
+        
+        if " " in self.name:
+            raise ValueError("Column name cannot contain spaces.")
+
 
 class Table(BaseModel):
     name: str

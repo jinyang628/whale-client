@@ -1,6 +1,6 @@
 import asyncio
 from whale_client.models.application import Application
-from whale_client.models.table import Column, DataType, PrimaryKey, Table, ForeignKey
+from whale_client.models.table import Column, DataType, PrimaryKey, Table
 from whale_client.models.manager import Manager
 
 
@@ -27,14 +27,12 @@ async def main():
 
     user_feedback_tables = [user_feedback_table]
 
-    application_name = "feedback34"
+    application_name = "user_feedback"
 
     application = Application(application_name, user_feedback_tables)
 
     manager = Manager()
     response: str = manager.commit(application=application)
-    print(response)
-
 
 if __name__ == "__main__":
     asyncio.run(main())
