@@ -33,6 +33,7 @@ async def main():
 
     manager = Manager()
     response: str = manager.commit(application=application)
-
+    print(response)
+    
 if __name__ == "__main__":
     asyncio.run(main())

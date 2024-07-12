@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
 
-class ApplicationRequest(BaseModel):
+class PostApplicationRequest(BaseModel):
     name: str
     tables: list[dict]
 
 
-class ApplicationResponse(BaseModel):
+class PostApplicationResponse(BaseModel):
     name: str

@@ -1,7 +1,10 @@
 from enum import StrEnum
 from typing import Optional, Any
 from pydantic import BaseModel, model_validator
+import logging
 
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 # TODO: Expand the valid data types as per SQLAlchemy/SQLite's valid data types
 class DataType(StrEnum):
@@ -9,14 +12,15 @@ class DataType(StrEnum):
     INTEGER = "integer"
     FLOAT = "float"
     BOOLEAN = "boolean"
+    DATE = "date"
     DATETIME = "datetime"
+    UUID = "uuid"
 
 
-# TODO: Add more types, e.g. UUID, etc. Will handle the id generation in house in server
-# TODO: Some of the primary key types require the column to be a particular data type. E.g. AUTO_INCREMENT requires the column to be an integer
 class PrimaryKey(StrEnum):
     NONE = "none"
     AUTO_INCREMENT = "auto_increment"
+    UUID = "uuid"
 
 
 class ForeignKey(BaseModel):
@@ -39,15 +43,40 @@ class Column(BaseModel):
 
         if not isinstance(data, dict):
             raise ValueError("Column data must be a dictionary.")
-
+        
+        cls._validate_primary_key(data)
+        cls._set_default_value(data)
+        
+        return data
+    
+    @staticmethod
+    def _validate_primary_key(data: dict) -> None:
+        if "primary_key" not in data:
+            return
+        
+        match data["primary_key"]:
+            case PrimaryKey.AUTO_INCREMENT:
+                data["data_type"] = DataType.INTEGER
+                data["nullable"] = False
+                data["default_value"] = 0
+                data["unique"] = True
+                data["foreign_key"] = None
+            case PrimaryKey.UUID:
+                data["data_type"] = DataType.STRING
+                data["nullable"] = False
+                data["default_value"] = ""
+                data["unique"] = True
+                data["foreign_key"] = None
+            case PrimaryKey.NONE:
+                pass
+            case _:
+                raise ValueError(f"Invalid primary key type: {data['primary_key']}")
+            
+    @staticmethod
+    def _set_default_value(data: dict) -> None:
         # If the default value is set, use it
         if "default_value" in data:
-            return data
-
-        if "nullable" in data:
-            if data["nullable"]:
-                # If the column is nullable, the default value is None
-                return data
+            return
 
         data_type = data["data_type"]
         if data_type == DataType.STRING:

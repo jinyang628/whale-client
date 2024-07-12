@@ -7,7 +7,7 @@ import os
 
 import logging
 
-from whale_client.models.api.entry import ApplicationRequest, ApplicationResponse
+from whale_client.models.api.entry import PostApplicationRequest, PostApplicationResponse
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
@@ -18,13 +18,13 @@ BASE_URL = os.getenv("BACKEND_ENDPOINT")
 SERVICE_ENDPOINT = "application"
 
 
-def post_application(input: ApplicationRequest) -> Optional[ApplicationResponse]:
+def post_application(input: PostApplicationRequest) -> Optional[PostApplicationResponse]:
     try:
         response = requests.post(
             f"{BASE_URL}/{SERVICE_ENDPOINT}", json=input.model_dump()
         )
         response.raise_for_status()
-        application_response = ApplicationResponse.model_validate(json.loads(response.text))
+        application_response = PostApplicationResponse.model_validate(json.loads(response.text))
         return application_response
     except TypeError as e:
         log.error(
