@@ -15,7 +15,7 @@ async def main():
         ),
         Column(name="name", data_type=DataType.STRING, nullable=False),
         Column(
-            name="applied", data_type=DataType.BOOLEAN, nullable=False, default=False
+            name="applied", data_type=DataType.BOOLEAN, nullable=True, default=False
         ),
         Column(name="status", data_type=DataType.STRING, nullable=True),
         Column(name="contact", data_type=DataType.STRING, nullable=True),
