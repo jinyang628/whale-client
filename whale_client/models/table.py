@@ -6,6 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
+
 # TODO: Expand the valid data types as per SQLAlchemy/SQLite's valid data types
 class DataType(StrEnum):
     STRING = "string"
@@ -13,7 +14,7 @@ class DataType(StrEnum):
     FLOAT = "float"
     BOOLEAN = "boolean"
     DATE = "date"
-    DATETIME = "datetime"
+    # DATETIME = "datetime"
     UUID = "uuid"
 
 
@@ -43,17 +44,17 @@ class Column(BaseModel):
 
         if not isinstance(data, dict):
             raise ValueError("Column data must be a dictionary.")
-        
+
         cls._validate_primary_key(data)
         cls._set_default_value(data)
-        
+
         return data
-    
+
     @staticmethod
     def _validate_primary_key(data: dict) -> None:
         if "primary_key" not in data:
             return
-        
+
         match data["primary_key"]:
             case PrimaryKey.AUTO_INCREMENT:
                 data["data_type"] = DataType.INTEGER
@@ -71,7 +72,7 @@ class Column(BaseModel):
                 pass
             case _:
                 raise ValueError(f"Invalid primary key type: {data['primary_key']}")
-            
+
     @staticmethod
     def _set_default_value(data: dict) -> None:
         # If the default value is set, use it
@@ -97,12 +98,12 @@ class Column(BaseModel):
         self._validate_name()
 
     def _validate_name(self):
-        if not self.name: 
+        if not self.name:
             raise ValueError("Column name cannot be empty.")
-        
+
         if not self.name.islower():
             raise ValueError("All characters in column name must be in lower case.")
-        
+
         if " " in self.name:
             raise ValueError("Column name cannot contain spaces.")
 
@@ -127,11 +128,11 @@ class Table(BaseModel):
             raise ValueError("Exactly one column must be set as primary key.")
 
     def _validate_name(self):
-        if not self.name: 
+        if not self.name:
             raise ValueError("Table name cannot be empty.")
-        
+
         if not self.name.islower():
             raise ValueError("All characters in table name must be in lower case.")
-        
+
         if " " in self.name:
             raise ValueError("Table name cannot contain spaces.")
