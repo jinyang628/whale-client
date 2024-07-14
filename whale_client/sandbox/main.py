@@ -23,6 +23,8 @@ async def main():
         name="feedback",
         description="This table stores the user feedback",
         columns=user_feedback_columns,
+        enable_created_at_timestamp=True,
+        enable_updated_at_timestamp=True,
     )
 
     user_feedback_tables = [user_feedback_table]

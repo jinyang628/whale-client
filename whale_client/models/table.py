@@ -111,6 +111,8 @@ class Table(BaseModel):
     name: str
     description: Optional[str] = None
     columns: list[Column]
+    enable_created_at_timestamp: Optional[bool] = False
+    enable_updated_at_timestamp: Optional[bool] = False
 
     def __init__(self, **data):
         super().__init__(**data)
