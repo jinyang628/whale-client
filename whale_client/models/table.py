@@ -92,6 +92,8 @@ class Column(BaseModel):
             data["default_value"] = 0.0
         elif data_type == DataType.BOOLEAN:
             data["default_value"] = False
+        elif data_type == DataType.DATE:
+            data["default_value"] = "1970-01-01"
         # elif data_type == DataType.DATETIME:
         #     data["default_value"] = "1970-01-01T00:00:00Z"  # ISO format for datetime
 
