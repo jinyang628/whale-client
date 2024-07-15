@@ -19,8 +19,8 @@ async def main():
         ),
         Column(name="status", data_type=DataType.STRING, nullable=True),
         Column(name="contact", data_type=DataType.STRING, nullable=True),
-        Column(name="opening_date", data_type=DataType.DATETIME, nullable=True),
-        Column(name="deadline", data_type=DataType.DATETIME, nullable=True),
+        Column(name="opening_date", data_type=DataType.DATE, nullable=True),
+        Column(name="deadline", data_type=DataType.DATE, nullable=True),
     ]
 
     feedback_columns = [
