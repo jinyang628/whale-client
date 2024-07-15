@@ -31,7 +31,7 @@ class ForeignKey(BaseModel):
 class Column(BaseModel):
     name: str
     data_type: DataType
-    enum_values: Optional[list[Any]] = None
+    enum_values: Optional[list[str]] = None
     nullable: bool = False
     default_value: Optional[Any] = None
     unique: Optional[bool] = False
@@ -58,8 +58,11 @@ class Column(BaseModel):
                 raise ValueError("enum_values cannot be empty.")
             if len(data.get("enum_values")) != len(set(data.get("enum_values"))):
                 raise ValueError("enum_values must be unique.")
-            if not all(isinstance(value, type(data.get("enum_values")[0])) for value in data.get("enum_values")):
-                raise ValueError("All enum_values must have the same type as the first enum value.")
+            
+            non_string_values = [v for v in data.get('enum_values') if not isinstance(v, str)]
+            if non_string_values:
+                raise ValueError(f"All enum_values must be of type string. Non-string values found: {non_string_values}")
+            
             if data.get('default_value') not in data.get("enum_values"):
                 raise ValueError("default_value must be one of the enum_values.")
         else:
