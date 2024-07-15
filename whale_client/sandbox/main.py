@@ -18,14 +18,14 @@ async def main():
         name="feedback",
         description="This table stores the user feedback",
         columns=user_feedback_columns,
-        primary_key=PrimaryKey.AUTO_INCREMENT,
+        primary_key=PrimaryKey.UUID,
         enable_created_at_timestamp=True,
         enable_updated_at_timestamp=True,
     )
 
     user_feedback_tables = [user_feedback_table]
 
-    application_name = "testing2131"
+    application_name = "feedback_app"
 
     application = Application(application_name, user_feedback_tables)
     manager = Manager()
