@@ -51,24 +51,32 @@ class Column(BaseModel):
 
     @staticmethod
     def _validate_enum_values(data: dict) -> None:
-        if data.get('data_type') == DataType.ENUM:
+        if data.get("data_type") == DataType.ENUM:
             if data.get("enum_values") is None:
-                raise ValueError("enum_values must be set for columns with data type 'enum'.")
+                raise ValueError(
+                    "enum_values must be set for columns with data type 'enum'."
+                )
             if not data.get("enum_values"):
                 raise ValueError("enum_values cannot be empty.")
             if len(data.get("enum_values")) != len(set(data.get("enum_values"))):
                 raise ValueError("enum_values must be unique.")
-            
-            non_string_values = [v for v in data.get('enum_values') if not isinstance(v, str)]
+
+            non_string_values = [
+                v for v in data.get("enum_values") if not isinstance(v, str)
+            ]
             if non_string_values:
-                raise ValueError(f"All enum_values must be of type string. Non-string values found: {non_string_values}")
-            
-            if data.get('default_value') not in data.get("enum_values"):
+                raise ValueError(
+                    f"All enum_values must be of type string. Non-string values found: {non_string_values}"
+                )
+
+            if data.get("default_value") not in data.get("enum_values"):
                 raise ValueError("default_value must be one of the enum_values.")
         else:
             if data.get("enum_values"):
-                raise ValueError("enum_values can only be set for columns with data type 'enum'.")
-    
+                raise ValueError(
+                    "enum_values can only be set for columns with data type 'enum'."
+                )
+
     @staticmethod
     def _set_default_value(data: dict) -> None:
         # If the default value is set, use it
