@@ -15,22 +15,22 @@ async def main():
     ]
 
     user_feedback_table = Table(
-        name="feedback",
+        name="feedback123",
         description="This table stores the user feedback",
         columns=user_feedback_columns,
-        primary_key=PrimaryKey.UUID,
+        primary_key=PrimaryKey.AUTO_INCREMENT,
         enable_created_at_timestamp=True,
         enable_updated_at_timestamp=True,
     )
 
     user_feedback_tables = [user_feedback_table]
 
-    application_name = "feedback_app"
+    application_name = "feedback_app11"
 
     application = Application(application_name, user_feedback_tables)
     manager = Manager()
     response: str = manager.commit(application=application)
-    print(response)
+    print("SUCCESS")
     
 if __name__ == "__main__":
     asyncio.run(main())
