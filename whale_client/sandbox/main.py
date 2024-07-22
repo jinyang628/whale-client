@@ -11,7 +11,12 @@ async def main():
         Column(name="application_name", data_type=DataType.STRING, nullable=False),
         Column(name="feedback", data_type=DataType.STRING, nullable=True),
         Column(name="personal_notes", data_type=DataType.STRING, nullable=True),
-        Column(name="rating", data_type=DataType.ENUM, enum_values=['1','2','3'], default_value='1')
+        Column(
+            name="rating",
+            data_type=DataType.ENUM,
+            enum_values=["1", "2", "3"],
+            default_value="1",
+        ),
     ]
 
     user_feedback_table = Table(
@@ -25,12 +30,13 @@ async def main():
 
     user_feedback_tables = [user_feedback_table]
 
-    application_name = "feedback_app11"
+    application_name = "feedback_app666"
 
     application = Application(application_name, user_feedback_tables)
     manager = Manager()
     response: str = manager.commit(application=application)
     print("SUCCESS")
-    
+
+
 if __name__ == "__main__":
     asyncio.run(main())
