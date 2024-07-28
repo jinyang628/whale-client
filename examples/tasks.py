@@ -7,13 +7,7 @@ from whale_client.models.manager import Manager
 async def main():
 
     tasks_columns = [
-        Column(
-            name="id",
-            data_type=DataType.INTEGER,
-            nullable=False,
-            primary_key=PrimaryKey.AUTO_INCREMENT,
-        ),
-        Column(name="title", data_type=DataType.STRING, nullable=False),
+        Column(name="title", data_type=DataType.STRING, nullable=False, unique=True),
         Column(name="description", data_type=DataType.STRING, nullable=True),
         Column(
             name="assigned_to",
@@ -26,22 +20,24 @@ async def main():
     ]
 
     whales_columns = [
-        Column(
-            name="id",
-            data_type=DataType.INTEGER,
-            nullable=False,
-            primary_key=PrimaryKey.AUTO_INCREMENT,
-        ),
         Column(name="whales", data_type=DataType.STRING, nullable=False, unique=True),
     ]
 
     tasks_table = Table(
-        name="tasks", description="This table stores the tasks", columns=tasks_columns
+        name="tasks",
+        description="This table stores the tasks",
+        columns=tasks_columns,
+        primary_key=PrimaryKey.AUTO_INCREMENT,
+        enable_created_at_timestamp=True,
+        enable_updated_at_timestamp=True,
     )
     whales_table = Table(
         name="whales",
         description="This table stores the whales working on tasks",
         columns=whales_columns,
+        primary_key=PrimaryKey.AUTO_INCREMENT,
+        enable_created_at_timestamp=True,
+        enable_updated_at_timestamp=True,
     )
 
     tasks_application_tables = [tasks_table, whales_table]
