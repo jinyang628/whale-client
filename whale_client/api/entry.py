@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 
 load_dotenv()
 BASE_URL = os.getenv("BACKEND_ENDPOINT")
-SERVICE_ENDPOINT = "application"
+SERVICE_ENDPOINT = "application/build"
 
 
 def post_application(input: PostApplicationRequest) -> Optional[PostApplicationResponse]:
