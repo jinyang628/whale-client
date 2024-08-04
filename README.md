@@ -1,5 +1,7 @@
 # whale-client
-The public-facing SDK for Whale
+The public-facing SDK for Whale. 
+
+Use React to create applications for humans. Use Whale to create applications for AI
 
 ## Install Poetry
 
