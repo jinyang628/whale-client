@@ -1,5 +1,5 @@
 # whale-client
-The SDK for Whale
+The public-facing SDK for Whale
 
 ## Install Poetry
 
